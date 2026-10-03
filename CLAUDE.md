@@ -1,29 +1,22 @@
-# WasteWise — persistent Claude Code instructions
+# WasteWise — persistent Claude Code instructions (game folder)
 
-## Read first, in this order
-1. `MASTER_PROMPT.md` — the consolidated product requirements, architecture, educational goals and execution protocol.
-2. `FINAL_IDEATION.md` — newest decisions, which supersede older brainstorming.
-3. `index.html`, `styles.css`, `game.js`, `README.md` — the actual working baseline. Do not assume it is a React/Phaser project yet.
-4. `references/CLIMATE_HACKTION_SOURCE_NOTES.md` and both PDFs for official source requirements.
-5. `TEACHER_GUIDE.md`, `VOICE_CAST.md`; consult `history/*.txt` only to understand previous alternative ideas.
+## What this folder is
+The **current** WasteWise game, rebuilt from scratch on 3 Oct 2026 in plain HTML/CSS/JS (no build step). The original prototype in `../WasteWise_Claude_Code_Bundle/` is reference only — do not edit it.
 
-## Priority of truth
-Official source PDFs for event rules and curriculum references > most recent user-approved decisions in FINAL_IDEATION.md > MASTER_PROMPT.md > existing code for *actual* implemented behaviour > historical chat notes. If these conflict, explicitly report the conflict; do not silently claim they are equivalent.
+## Read first
+1. `README.md` — features, controls, status, structure.
+2. `MASTER_PROMPT.md`, `FINAL_IDEATION.md` — product requirements (FINAL_IDEATION wins on conflicts; official PDFs in `references/` win over both).
+3. `docs/IMPLEMENTATION_LOG.md`, `docs/TEST_REPORT.md` — what was built and tested, and known gaps.
 
-## Team workflow
-There is **one developer** running Claude Code. The other team members share the ChatGPT Climate Hacktion project for discussion; do not assume Claude Code has live access to ChatGPT project conversations. This folder is a portable snapshot of available project context. Keep future updates in these Markdown files or the repository.
+## Architecture (load order = `index.html` script order)
+`js/core` (util, input, audio, save, engine) → `js/art` (draw, characters, items, world) → `js/logic` (maze, scoring — pure, Node-testable) → `js/data` (content lines, assessment bank, maps) → `js/world` (tilemap/collision/A*, entities, fx, worldscene factory) → `js/ui` (HUD, dialogue, panels, menus) → `js/story` (script helpers, story manager, ch1, ch2 [canteen + maze scenes], ch3 [lab scene], final [final + results scenes]) → `js/scenes` (title/setup, hub) → `js/main.js`.
+- Global namespace `window.WW`. Scenes register with `WW.engine.register(name, scene)`; walkable scenes come from `WW.makeWorldScene(cfg)`.
+- Story scripts are async: `await S.line('id')`, `await S.askLine(id, choices)`, `await S.panel({...})`.
+- All dialogue lives in `WW.data.lines` with IDs (the voice clip hook is `WW.data.voiceClips`).
+- Saved state: `WW.save.data` (chapter stages, world state that drives visuals, stats); settings are saved separately.
 
-## Rules for editing
-- Inspect project contents and run a smoke check before rewriting or replacing the prototype.
-- Keep working features unless a tested refactor is necessary.
-- Build the smallest stable and demonstrable vertical slice before expanding the three chapters.
-- Provide real game controls, meaningful choices, immediate feedback and assessment; no fake UI-only buttons.
-- No Disney/Mickey Mouse artwork, voice clones, signature catchphrases or imitative character performance. Use the original Milo the Eco Mouse mascot and original cheerful narration.
-- No real student names, unnecessary accounts or exposed API keys. Narration requires subtitles and mute/fallback controls.
-- Cite curriculum and climate facts in documentation; don't invent code mappings, test results or measured climate impact.
-- Keep existing HTML/CSS/JS baseline playable while improving; choose framework migration only if justified by time and testing.
-- Never report tests as passed unless actually executed.
-- For each change, run available checks and clearly explain what is implemented, what remains, and evidence of tests.
-
-## First instruction to execute
-Read `MASTER_PROMPT.md`, `FINAL_IDEATION.md` and the current codebase; produce a brief gap analysis and implement the single highest-value missing working feature. Continue in a test/fix loop.
+## Rules
+- Keep it playable offline from `index.html`; no ES modules, no fetch, no secrets.
+- Original art and audio only; no Disney/Mickey likeness, voice or catchphrases.
+- Fictional school data and rules must stay labelled; never auto-award the 6 teacher marks.
+- After every change: `node --check` on changed files, `node tests/run-tests.js`, then run `tests/smoke.html` (served by `python3 tools/serve.py`) and expect all checks to pass with no JS errors. Report honestly what was and wasn't tested.

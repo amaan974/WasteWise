@@ -138,7 +138,7 @@
         if (this.map.W <= E.W) x = (this.map.W - E.W) / 2;
         else x = U.clamp(x, 0, this.map.W - E.W);
         if (this.map.H <= E.H) y = (this.map.H - E.H) / 2;
-        else y = U.clamp(y, 0, this.map.H - E.H);
+        else y = U.clamp(y, -(cfg.camTopPad || 0), this.map.H - E.H);
         return { x, y };
       },
       focusPoint() {
@@ -201,6 +201,16 @@
         if (p.emote) { p.emoteT -= dt; if (p.emoteT <= 0) p.emote = null; }
         if (p.vz || p.z > 0) { p.vz -= 900 * dt; p.z += p.vz * dt; if (p.z <= 0) { p.z = 0; p.vz = 0; } }
         cfg.update && cfg.update(this, dt);
+        // gentle nudge if a player stands still for a long time with nothing open
+        if (!this.busy && !uiBlocking && !p.moving && !p.path && this.milo && WW.story.objective && WW.story.objective.text) {
+          this.idleT = (this.idleT || 0) + dt;
+          if (this.idleT > 28) {
+            this.idleT = 0;
+            this.milo.setEmote('?', 2.5);
+            this.milo.jump(160);
+            WW.ui.toast('🐭 Milo: “Psst! ' + U.esc(WW.story.objective.text) + ' — follow the yellow arrow!”', 'info', 4200);
+          }
+        } else this.idleT = 0;
         WW.fx.update(dt);
         // camera
         const tgt = this.camTarget();

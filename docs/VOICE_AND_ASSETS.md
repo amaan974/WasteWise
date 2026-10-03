@@ -1,30 +1,28 @@
-# Original characters, audio and animation handoff
+# Voices, audio and art — how they work and how to upgrade them
 
-## Cast and voices
+## Current voices (working now)
+Every line is stored with an ID in `js/data/content.js` (`DATA.lines`), e.g. `'ch1.maple.02': ['maple', 'worried', 'Our rain tank is almost empty…']`. The player chooses the voice mode on the setup screen or in Esc → Sound & settings:
 
-- `milo`: original Eco Mouse mascot, animated and playful, youthful energy without copying any famous character's signature voice. No Disney or Mickey Mouse imitation.
-- `maple`: Principal Maple, calm Australian adult voice, clear and warm.
-- `sunny`: Chef Sunny, upbeat comical adult, comfortable pacing.
-- `sprout`: Professor Sprout, curious, reassuring and slower for explanations.
+| Mode | What it does |
+|---|---|
+| **Read aloud** (default) | The browser's built-in speech synthesis. Each character gets a different voice where available, plus their own pitch and speed: **Milo** high and quick (energetic, child-friendly), **Maple** warm and clear (prefers an Australian voice such as "Karen"), **Sunny** brisk and upbeat, **Sprout** slower and gentle. Music quietens while someone speaks. |
+| **Cartoon chatter** | Short synthesised syllable blips with a different pitch and timbre per character (works offline on any device). |
+| **Text only** | No voices. |
 
-Use **one voice ID per character** only if ElevenLabs generation is authorised and configured. Prefer pre-rendered clips generated outside the public client and stored in `assets/voices/`. Do not commit API credentials; do not attempt to manufacture audio that does not exist.
+Subtitles are always shown, mute stops sound immediately, the 🔁 button replays a line, and audio never blocks progress or affects marks.
 
-Every line must have:
-- text subtitle (source of truth), speaker name, audio reference (optional), language (en-AU preferred), and a replay affordance;
-- `talk/idle` animation state or simple mouth cycle while audio is playing;
-- a fallback path when browser speech or clips are unavailable;
-- a mute control that stops sound immediately.
+## Upgrading to licensed recorded voices (e.g. ElevenLabs)
+1. Get rights to use the voices (original voices only — **no imitation of Mickey Mouse or any real person**).
+2. Generate one MP3 per line ID **outside the game** (never put an API key in browser code).
+3. Put the files in `assets/voices/` and list them in `js/data/content.js`:
+   ```js
+   DATA.voiceClips = { 'intro.milo.01': 'intro.milo.01.mp3', 'ch1.maple.02': 'ch1.maple.02.mp3' };
+   ```
+4. That's all — `WW.audio.speak()` plays the clip when one exists and falls back to browser speech otherwise.
+5. Add each file to `assets/ASSET_MANIFEST.csv` and the credits.
 
-Use `content/CHARACTER_DIALOGUE.json` as proposed sample line IDs and text; the app must explicitly load/parse it if desired. Filename suggestions in `assets/ASSET_MANIFEST.csv` are placeholders, not actual generated assets.
+## Music and sound effects
+Six original tunes (title, school, garden, canteen maze, lab, assessment) are written as note patterns in `js/core/audio.js` and played by a small Web Audio synthesiser. There are 23 synthesised sound effects (pickup, correct, gentle "wrong", door, drip, rain, methane bubble, fanfare, Milo's squeak…). No audio files are used.
 
-## Animation priority
-
-**Must:** Player walk/idle; Milo idle/bounce; character interaction cue; item picked up; correct/wrong sorting feedback; one school state change.
-
-**Nice to have:** Run, celebration, talking mouth loop, transition wipe, trees swaying.
-
-**Not needed:** full facial rig, 3D, complex cutscenes, reactive soundtrack, live generated voices.
-
-## Privacy and legal
-
-No real names required. No student voice collection or microphone needed. Use original/licensed graphics, voices and sounds. Maintain the asset ledger with author/source/licence/generation date, and disclose all AI generation in the hackathon submission.
+## Art
+All characters and the world are drawn in code (`js/art/*.js`) — consistent, scalable and original. Animation states: idle (breathing, blinking), walk/run in 4 directions, talk (mouth synced to typing or speech), wave, point, think, celebrate, carry, emotions (happy, excited, worried, sad, surprised, thinking, proud). To preview everything, open `tests/art-preview.html` (`?big=milo&freeze=1` or `?portraits=1`).

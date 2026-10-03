@@ -35,6 +35,11 @@
     await load('../index.html?debug=1&scene=hub');
     const W = frame.contentWindow;
     const WW = W.WW, d = W.WWDEBUG;
+    const jsErrors = [];
+    W.addEventListener('error', (e) => jsErrors.push(e.message));
+    W.addEventListener('unhandledrejection', (e) => jsErrors.push('Unhandled promise: ' + (e.reason && e.reason.message)));
+    const origErr = W.console.error.bind(W.console);
+    W.console.error = (...a) => { jsErrors.push(a.map(String).join(' ')); origErr(...a); };
     const doc = frame.contentDocument;
     const top = () => [...doc.querySelectorAll('.panel-backdrop:not(.out) .panel')].pop();
     const btn = (re) => top() && [...top().querySelectorAll('button')].find((b) => re.test(b.textContent));
@@ -250,6 +255,7 @@
     check(WW.final.score().total === 20, 'Teacher marks are added: 20/20');
     check(/Total: 20 \/ 20/.test(WW.final.reportText()), 'Teacher report text generated');
     check(WW.save.data.finalDone, 'Game marked complete on this device');
+    check(jsErrors.length === 0, 'No JavaScript errors during the whole playthrough' + (jsErrors.length ? ': ' + jsErrors.slice(0, 3).join(' | ') : ''));
     log(null, `Finished in ${((performance.now() - t0) / 1000).toFixed(1)} s`);
     summary.textContent = `${pass} passed, ${fail} failed`;
     summary.className = fail ? 'bad' : 'ok';

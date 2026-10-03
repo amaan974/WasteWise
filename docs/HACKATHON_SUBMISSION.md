@@ -1,38 +1,28 @@
-# Climate Hack-tion submission working checklist
+# Climate Hack-tion submission — draft answers (edit before submitting)
 
-**Source:** The bundled `references/Participant Guide.pdf` controls. Review the actual Junction form before final upload.
+**Source of rules:** `references/Participant Guide.pdf` (§9). Deadline: **Sunday 4 October 2026, 9:00 PM Sydney time (AEDT)**. Submit progressively — don't wait for the last minutes.
 
-## Required information / artifacts to prepare
+| Field | Draft |
+|---|---|
+| Project name | WasteWise — The Eco Crew Adventure |
+| One-sentence summary | A story-driven cartoon browser adventure where Grade 4 students explore a school with Milo the Eco Mouse, make waste and resource decisions with visible consequences, and complete an independent 20-mark challenge. |
+| Selected challenge | Climate awareness & education (primary — "climate action education for all by 2035"); Waste & methane (secondary — "halve the growth in municipal solid waste by 2035") |
+| Team nationality | *(team to fill: Australia)* |
+| Team members & roles | *(team to fill)* — e.g. developer (Claude Code operator), learning design, story/voice, pitch/video |
+| Problem & target users | Victorian Grade 4 students (ages 9–10) often learn sustainability as facts, with few chances to *practise* everyday decisions about water, energy and waste. Teachers need engaging activities with assessable evidence. |
+| Solution & intended impact | A walkable school adventure: investigate resource waste, prevent and sort lunch waste in a real maze (with the food → landfill → methane link), and use maps and data to choose evidence-based improvements. It ends with an untimed assessment (14 auto + 6 teacher marks) and a teacher report. Intended impact: climate education that builds habits (prevent, reuse, sort, use evidence) — to be validated in classrooms. |
+| Project description / pitch | See README "What's in the game" + DEMO_SCRIPT. |
+| Demo video (≤ 2 min) | *(record using docs/DEMO_SCRIPT.md)* |
+| Repository / files | *(public GitHub link — must stay live through judging)* |
+| Tools used | See `CREDITS_AND_AI_DISCLOSURE.md` (Claude Code; ChatGPT for earlier ideation — confirm; Google Fonts; browser speech; no other libraries/assets) |
+| Disclosures | Built from scratch during the event (git history); all art/music drawn or synthesised in code; schools and data fictional; no student data collected; not tested with students yet; curriculum mapping to be confirmed with VCAA. |
 
-- [ ] Project title: **WasteWise — The Eco Crew Adventure**
-- [ ] One-sentence summary, audience and problem statement.
-- [ ] Challenge focus: climate awareness/education, with waste & methane as secondary.
-- [ ] Team details and actual roles.
-- [ ] Problem → mechanics → learning evidence → potential impact narrative.
-- [ ] **Public** code repository or publicly accessible project files, maintained for judging.
-- [ ] Deployed working prototype or clear instructions for running it.
-- [ ] Recorded **demo video no longer than 2 minutes**, showing actual gameplay.
-- [ ] Tools, APIs, asset sources, licence compliance and AI disclosures.
-- [ ] Statement about project work undertaken during the hackathon; check compliance with the official starting rules.
-- [ ] Optional classroom-testing evidence, honestly stated (including sample size and limitations).
+## Quality check before submitting
+- [ ] Repository is **public** and opens without requesting access
+- [ ] README explains how to run it (done)
+- [ ] Video shows real gameplay and is ≤ 2:00
+- [ ] Team members and roles are correct
+- [ ] Submission saved and visibly marked complete before 9 PM AEDT Sunday
 
-## Two-minute demonstration outline
-
-0:00–0:15 — Explain school waste/resource learning problem.
-0:15–0:30 — Show exploration at Sunny School and Milo.
-0:30–1:15 — Play Chapter 2 Waste Maze; show at least one item sorted and an explanatory consequence.
-1:15–1:35 — Show geographical evidence/chart and proposed action.
-1:35–1:50 — Show untimed final assessment and teacher review distinction.
-1:50–2:00 — State COP31 alignment, user group and next classroom validation step.
-
-## Constraints
-
-Participant Guide lists COP31 alignment 30%, build quality 30%, creativity 20%, presentation clarity 20%. Do not imply the score guarantees an award.
-
-Deadline listed in guide: **Sunday 4 October 2026, 9:00 PM Sydney time (AEDT)**. Don't assume the developer's computer uses the same time zone; check the live platform if in doubt.
-
-## Suggested honest submission copy (adapt to implemented features)
-
-"WasteWise is a browser-based, story-driven sustainability adventure for Victorian Grade 4 students. Players explore a fictional school, investigate resource use, practise waste decisions and examine simulated evidence before completing an independent assessment. We aim to investigate whether practicing environmental decisions within a game improves understanding. School-curriculum mapping and educational effectiveness require teacher review and further testing."
-
-Delete references to unfinished features rather than presenting them as complete.
+## Honest claims (copy-safe)
+"WasteWise is a playable prototype with three chapters and a 20-mark final challenge, verified by unit tests and an automated full playthrough. It has not yet been trialled with students. Curriculum alignment is our team's mapping to VC2HG4K09 and needs teacher validation."

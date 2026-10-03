@@ -382,6 +382,7 @@
     open(tab = 'main') {
       if (this.isOpen) return;
       this.isOpen = true;
+      this.direct = tab !== 'main'; // opened straight to a sub-page (e.g. from the title screen)
       WW.audio.sfx('page');
       WW.audio.stopSpeech();
       this.render(tab);
@@ -409,9 +410,9 @@
           ),
         );
       } else if (tab === 'help') {
-        card.append(el('h2', { class: 'menu-title' }, '❓ How to play'), UI.helpContent(), el('div', { class: 'menu-buttons row' }, el('button', { class: 'btn primary', type: 'button', autofocus: true, onclick: () => this.render('main') }, '← Back')));
+        card.append(el('h2', { class: 'menu-title' }, '❓ How to play'), UI.helpContent(), el('div', { class: 'menu-buttons row' }, el('button', { class: 'btn primary', type: 'button', autofocus: true, onclick: () => (this.direct ? this.close() : this.render('main')) }, this.direct ? '✓ Done' : '← Back')));
       } else if (tab === 'settings') {
-        card.append(el('h2', { class: 'menu-title' }, '⚙ Sound & settings'), UI.settingsForm(), el('div', { class: 'menu-buttons row' }, el('button', { class: 'btn primary', type: 'button', onclick: () => this.render('main') }, '← Back')));
+        card.append(el('h2', { class: 'menu-title' }, '⚙ Sound & settings'), UI.settingsForm(), el('div', { class: 'menu-buttons row' }, el('button', { class: 'btn primary', type: 'button', onclick: () => (this.direct ? this.close() : this.render('main')) }, this.direct ? '✓ Done' : '← Back')));
       } else if (tab === 'teacher') {
         const s = WW.save.data;
         card.append(

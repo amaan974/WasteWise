@@ -17,6 +17,7 @@
   const canteen = WW.makeWorldScene({
     mapDef: WW.maps.canteen,
     bg: '#5b3a2a',
+    camTopPad: 60,
     setup(sc, params) {
       const ex = sc.map.extra;
       const sunny = sc.addNPC('sunny', 'sunny', ex.sunny.x, ex.sunny.y, { dir: 'down', emotion: D().ch2.stage === 'enter' ? 'surprised' : 'happy' });
@@ -33,6 +34,7 @@
         WW.engine.go('hub', { spawn: { x: doors.canteen.x, y: doors.canteen.y + 34 }, dir: 'down' });
       } });
       WW.story.refresh();
+      if (D().ch2.stage === 'locked') { D().ch2.stage = 'enter'; WW.save.commit(); } // demo / teacher unlock
       const st = D().ch2.stage;
       if (st === 'enter') sc.runScript(() => C2.intro(sc));
       else if (st === 'keep') sc.runScript(() => C2.keepClean(sc));

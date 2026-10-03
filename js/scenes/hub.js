@@ -67,6 +67,9 @@
         if (sc._drip <= 0 && Math.hypot(tap.x - sc.player.x, tap.y - sc.player.y) < 260) { WW.audio.sfx('drip'); sc._drip = 1.1; }
       }
       for (const b of birds) { b.x += b.sp * dt; if (b.x > 40 * TS + 100) b.x = -100; }
+      // the garden has its own gentle tune
+      const inGarden = sc.player.x < 12.5 * TS && sc.player.y > 8 * TS && sc.player.y < 22 * TS;
+      if (inGarden !== sc._inGarden) { sc._inGarden = inGarden; WW.audio.playMusic(inGarden ? 'garden' : 'hub'); }
     },
     drawOver(sc, ctx, t) {
       // butterflies appear as the garden recovers

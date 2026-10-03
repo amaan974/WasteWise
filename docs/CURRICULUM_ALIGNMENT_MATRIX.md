@@ -1,35 +1,22 @@
-# Draft learning-to-evidence matrix — Victorian Geography Levels 3–4, Version 2.0
+# Learning-to-evidence matrix — Victorian Geography Levels 3–4 (Version 2.0)
 
-**Scope:** A targeted resource sustainability and waste-management *unit*, not the whole Levels 3–4 Geography curriculum. Teacher validation required before classroom use or claims of formal alignment.
+**Scope:** a targeted resources-and-waste sustainability unit, not the whole Levels 3–4 Geography curriculum. Teacher validation is required before classroom use or claims of formal alignment.
 
-| Curriculum reference | Learning goal in game | Chapter / task | Evidence of learning | Assessment approach |
-| --- | --- | --- | --- | --- |
-| VC2HG4K09 — sustainability and application to natural resource use / waste management | Choose ways to avoid wasting resources and manage waste | Ch 1 leaking tap, Ch 2 waste prevention and maze | Correct choices **and explanation** | New resource/waste scenario |
-| VC2HG4S01 — develop geographical inquiry questions | Identify what needs investigating at Sunny School | Ch 3 "Where does our waste come from?" | Student recognises a testable school inquiry question | Select a suitable investigation question |
-| VC2HG4S02 — locate/collect/record geographic information | Gather evidence from multiple locations | Ch 3 three locations, map, fictional audit | Collected observations | Observation-based task |
-| VC2HG4S03 — represent/analyse information | Represent data and find meaningful patterns | Ch 3 bar chart | Correct comparison of categories | Interpret **new** chart |
-| VC2HG4S04 — draw conclusions | Explain what audit patterns suggest | Ch 3 evidence conversation | Conclusion linked to sample | Data interpretation |
-| VC2HG4S05 — propose responses and consider impacts | Select a feasible change | Ch 3 improvement plan | Action justified by evidence | Teacher-marked proposal |
-| VC2HG4S06 — communicate using sources and geography | State recommendation clearly | Finale response | Written/oral explanation | Teacher-marked clarity |
+**Verification status (3 Oct 2026):** The official VCAA page (<https://f10.vcaa.vic.edu.au/learning-areas/humanities/geography/curriculum>) loads its content descriptions dynamically and could not be read by our tools. A secondary source (Twinkl's Levels 3–4 Geography listing) gives **VC2HG4K09** as *"Sustainability and its application to the use of natural resources and the management of waste"*, with elaborations about composting and water purification, where renewable resources come from, and comparing ways to reduce resource use. That matches the team's mapping. **The skills codes (VC2HG4S0x) below come from the team's planning documents and are NOT verified** — please check them on the VCAA site.
 
-### Design implication
+| Curriculum reference | Learning goal | Where in the game (implemented) | Evidence captured | Assessed in final? |
+|---|---|---|---|---|
+| **VC2HG4K09** — sustainability, use of natural resources, management of waste | Identify resources (water, energy, materials) being wasted and choose sustainable, safe actions | Ch 1: 4 clue inspections (water/energy/materials), leak decision (report / unsafe / ignore + what-if), water-wise sequencing, rain-to-roots pipe puzzle | Clue first-try accuracy; decision log; puzzle completion | **A** (4 marks), **B** b4–b5 |
+| VC2HG4K09 (waste management) | Prevent → reuse → recycle/compost → landfill last; food in landfill produces methane | Ch 2: lunch prevention choice (changes the maze), waste maze with 4 stations under stated rules, wrong-station explanations, methane lesson, "keep it clean" choice | Items sorted; right first time; landfill share; lunch choice | **B** b1–b3 (sorting under new rules), **A** |
+| *VC2HG4S01 (unverified)* — inquiry questions | Choose a question that can be investigated | Ch 3: choose a testable question (two off-topic questions rejected) | Decision log | — (practice) |
+| *VC2HG4S02 (unverified)* — locate/collect/record | Use a map to find places; collect observations | Ch 3: compass map task (3 clues, 5 markers); walk to 3 real places in the school; classify audit items | Map first-try score; audit records (notebook) | **C** c4 (map direction) |
+| *VC2HG4S03 (unverified)* — represent/analyse | Build and read a bar chart | Ch 3: chart builder (totals from 3 sites), "biggest type?" and "most paper?" questions | Chart correct | **C** c1–c3 (new chart) |
+| *VC2HG4S04 (unverified)* — draw conclusions | Explain what the evidence suggests | Ch 3: pick the evidence that supports a plan; "rainbow bins" (no evidence) rejected | Decision log | **C** c5 |
+| *VC2HG4S05 (unverified)* — propose actions | Choose a feasible action that matches the evidence | Ch 3 plan → visible (imagined, labelled) school change | Plan chosen + justification | **D** (6, teacher) |
+| *VC2HG4S06 (unverified)* — communicate | Write a clear recommendation | Final Part D with sentence starters and a self-check | Written response in the report | **D** (6, teacher) |
 
-The maze itself only supports part of `VC2HG4K09`; it does **not** independently prove geographical inquiry skills. The map, waste audit, explanation and new assessment scenario provide additional evidence.
-
-### Assessment safeguards
-
-- Separate sorting accuracy from movement speed.
-- The assessment should use different items and a new chart, not memorised gameplay.
-- Use a 20-point suggested rubric: 4 recognition, 5 sustainable actions, 5 data/map interpretation, 6 justification marked by a teacher.
-- Do not claim the software independently issues an official Victorian curriculum grade.
-- Waste collection depends on the school and council: the game must declare fictional Sunny School rules.
-
-### References and confidence
-
-Official VCAA Version 2.0 Geography curriculum page: https://f10.vcaa.vic.edu.au/learning-areas/humanities/geography/curriculum
-
-Official VCAA curriculum-mapping templates: https://f10.vcaa.vic.edu.au/resource-hub/geography-curriculum-area-map-templates
-
-The Version 2.0 page lists the Levels 3–4 achievement standard, but some content-description text is displayed dynamically; verify each code/wording there or in the official VCAA downloadable map. Codes/short paraphrases in this matrix are working mapping guidance, not quoted full authoritative curriculum text.
-
-Supporting code mappings: https://www.oup.com.au/__data/assets/pdf_file/0015/262140/Oxford-Atlas-Curriculum-Links-for-the-Victorian-Curriculum-2.0.pdf
+## Assessment safeguards (implemented)
+- Movement speed is never scored; maze accuracy is about choices, and there are no timers.
+- The final challenge uses a **new** school (Hilltop), new items (orange peel, cardboard, bread bag) and a new chart and map.
+- Only items with fixed answer keys are auto-marked (14). The written plan (6) is always "pending teacher review" until a teacher enters rubric marks.
+- No official VCAA grade is claimed; fictional rules and data are labelled throughout.

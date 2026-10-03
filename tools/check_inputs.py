@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Check supplementary handoff file integrity. DOES NOT test the actual game."""
+"""Check project file integrity (files present, JSON drafts parse, assessment marks add up).
+DOES NOT test the actual game: run `node tests/run-tests.js` and tests/smoke.html for that."""
 import csv
 import json
 import sys
@@ -7,8 +8,9 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 required = [
-    "CLAUDE.md", "MASTER_PROMPT.md", "FINAL_IDEATION.md",
-    "index.html", "game.js", "styles.css",
+    "CLAUDE.md", "MASTER_PROMPT.md", "FINAL_IDEATION.md", "README.md",
+    "index.html", "css/style.css", "js/main.js", "js/data/content.js", "js/data/assessment.js",
+    "tests/run-tests.js", "tests/smoke.html",
     "docs/BUILD_PRIORITY.md", "docs/WASTE_MAZE_SPEC.md",
     "docs/CURRICULUM_ALIGNMENT_MATRIX.md", "docs/VOICE_AND_ASSETS.md",
     "docs/QA_AND_TEST_PLAN.md", "docs/HACKATHON_SUBMISSION.md",
@@ -65,7 +67,7 @@ if p.is_file():
 if errors:
     print("CHECKS FAILED:")
     print("\n".join(" - " + e for e in errors))
-    if all(x.startswith("Missing: ") and x.partition(": ")[2] in ["CLAUDE.md","MASTER_PROMPT.md","FINAL_IDEATION.md","index.html","game.js","styles.css"] for x in errors):
+    if all(x.startswith("Missing: ") and x.partition(": ")[2] in ["CLAUDE.md","MASTER_PROMPT.md","FINAL_IDEATION.md","index.html","css/style.css","js/main.js"] for x in errors):
         print("TIP: This is the add-on folder alone. Copy docs/, content/, assets/, tools/ into the EXISTING bundle project root, then rerun.")
     sys.exit(1)
 print("Supplementary file and assessment integrity: PASS. Gameplay not tested.")

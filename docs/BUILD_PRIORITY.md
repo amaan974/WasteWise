@@ -1,5 +1,7 @@
 # WasteWise — engineering handoff and build priority
 
+> **Status update (3 Oct 2026):** all P0 items are implemented in this folder (Milo, a real waste maze, consequences + explanations, full start→results flow, muted/keyboard/touch play) and verified by `tests/run-tests.js` and `tests/smoke.html`. Still to do: deploy + record the demo video (P0 #7), licensed recorded voices (P1), and classroom testing. See `docs/TEST_REPORT.md`.
+
 **Do not start from zero.** The existing bundle has a single-page `index.html` loading `styles.css` and `game.js`, containing a navigable school, three chapter activities and an assessment. It is plain browser JS, not yet React/Phaser. The current guide character is **Pip**; final ideation calls for **Milo the Eco Mouse**. There is sorting UI, but not a true navigable waste *maze*. Speech currently uses browser speech synthesis rather than stored recordings. These are known design/implementation differences, not defects proven in a runtime test.
 
 ## P0 — finish for an honest demonstration

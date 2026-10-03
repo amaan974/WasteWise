@@ -39,6 +39,7 @@
   const lab = WW.makeWorldScene({
     mapDef: WW.maps.lab,
     bg: '#2e4a5a',
+    camTopPad: 60,
     setup(sc) {
       const ex = sc.map.extra;
       const sprout = sc.addNPC('sprout', 'sprout', ex.sprout.x, ex.sprout.y, { dir: 'down', emotion: 'happy' });
@@ -54,6 +55,7 @@
         WW.engine.go('hub', { spawn: { x: doors.lab.x, y: doors.lab.y + 34 }, dir: 'down' });
       } });
       WW.story.refresh();
+      if (D().ch3.stage === 'locked') { D().ch3.stage = 'enter'; WW.save.commit(); } // demo / teacher unlock
       const st = D().ch3.stage;
       if (st === 'enter') sc.runScript(() => C3.intro(sc));
       else if (st === 'plan') sc.runScript(() => C3.plan(sc));
