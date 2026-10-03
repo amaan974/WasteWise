@@ -1,0 +1,12 @@
+asset_id,proposed_path,type,owner_or_source,status,licence_and_notes
+milo_idle,assets/sprites/milo-idle.png,illustration,Original team-created,NOT_PROVIDED,Must be original; no Disney likeness
+milo_walk,assets/sprites/milo-walk.png,sprite_sheet,Original team-created,NOT_PROVIDED,4-direction motion or simpler tested alternative
+student_walk,assets/sprites/student-walk.png,sprite_sheet,Original team-created,NOT_PROVIDED,Original young adventurer avatar
+school_background,assets/backgrounds/sunny-school.png,background,Original team-created,NOT_PROVIDED,School courtyard and three accessible entrances
+maze_tiles,assets/tiles/maze.png,tileset,Original team-created,NOT_PROVIDED,Readable walls floor stations and collectables
+voice_milo,assets/voices/milo_intro.mp3,audio,ElevenLabs licensed/custom or browser fallback,NOT_PROVIDED,Original joyful voice; subtitles required
+voice_maple,assets/voices/maple_intro.mp3,audio,ElevenLabs licensed/custom or browser fallback,NOT_PROVIDED,Original Australian adult character
+voice_sunny,assets/voices/sunny_intro.mp3,audio,ElevenLabs licensed/custom or browser fallback,NOT_PROVIDED,Original cheerful canteen character
+voice_sprout,assets/voices/sprout_intro.mp3,audio,ElevenLabs licensed/custom or browser fallback,NOT_PROVIDED,Original gentle explainer
+sfx_pickup,assets/audio/pickup.ogg,sfx,Original team-created or licensed,NOT_PROVIDED,Audio must be optional
+sfx_success,assets/audio/success.ogg,sfx,Original team-created or licensed,NOT_PROVIDED,Accompany with readable feedback

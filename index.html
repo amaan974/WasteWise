@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#163a2f" />
+  <meta name="description" content="WasteWise — The Eco Crew Adventure: an original, story-driven cartoon browser game about natural resources and waste for Victorian Grade 4 students." />
+  <title>WasteWise — The Eco Crew Adventure</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232fa36b'/%3E%3Cpath d='M18 40 C18 22 34 14 48 16 C48 32 38 46 18 40Z' fill='%23c9f29b' stroke='%231f5f3a' stroke-width='3'/%3E%3C/svg%3E" />
+  <!-- Optional rounded fonts (SIL Open Font License). The game works offline with system fonts if these do not load. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="stage">
+      <canvas id="game" aria-label="WasteWise game world" role="img"></canvas>
+      <div id="touch"></div>
+      <div id="ui"></div>
+    </div>
+  </div>
+  <div class="rotate-hint" id="rotateHint">
+    <div>
+      <div style="font-size:60px">📱↻</div>
+      <p>WasteWise plays best with your device turned sideways (landscape).</p>
+      <button class="btn primary" type="button" onclick="document.getElementById('rotateHint').classList.add('dismissed')">Play anyway</button>
+    </div>
+  </div>
+  <div id="print-report"></div>
+  <noscript>WasteWise needs JavaScript turned on to play.</noscript>
+
+  <script src="js/core/util.js"></script>
+  <script src="js/core/input.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/save.js"></script>
+  <script src="js/core/engine.js"></script>
+  <script src="js/art/draw.js"></script>
+  <script src="js/art/characters.js"></script>
+  <script src="js/art/items.js"></script>
+  <script src="js/art/world.js"></script>
+  <script src="js/logic/maze.js"></script>
+  <script src="js/logic/scoring.js"></script>
+  <script src="js/data/content.js"></script>
+  <script src="js/data/assessment.js"></script>
+  <script src="js/data/maps.js"></script>
+  <script src="js/world/tilemap.js"></script>
+  <script src="js/world/entities.js"></script>
+  <script src="js/world/fx.js"></script>
+  <script src="js/world/worldscene.js"></script>
+  <script src="js/ui/ui.js"></script>
+  <script src="js/story/script.js"></script>
+  <script src="js/story/story.js"></script>
+  <script src="js/story/ch1.js"></script>
+  <script src="js/story/ch2.js"></script>
+  <script src="js/story/ch3.js"></script>
+  <script src="js/story/final.js"></script>
+  <script src="js/scenes/title.js"></script>
+  <script src="js/scenes/hub.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

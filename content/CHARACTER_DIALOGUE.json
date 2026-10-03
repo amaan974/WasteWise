@@ -1,0 +1,30 @@
+{
+  "schema_note": "Proposed narrative data; not automatically connected to the current game. Integrate explicitly in code.",
+  "locale": "en-AU",
+  "characters": {
+    "milo": {"display_name": "Milo the Eco Mouse", "voice_style": "original playful upbeat cartoon mascot"},
+    "maple": {"display_name": "Principal Maple", "voice_style": "warm clear Australian adult"},
+    "sunny": {"display_name": "Chef Sunny", "voice_style": "energetic friendly comic adult"},
+    "sprout": {"display_name": "Professor Sprout", "voice_style": "gentle curious explainer"}
+  },
+  "lines": [
+    {"id":"intro.milo.01","speaker":"milo","chapter":"intro","text":"Welcome to Sunny School! Ready to join the Eco Crew?","emotion":"excited","audio":null},
+    {"id":"intro.milo.02","speaker":"milo","chapter":"intro","text":"Walk to a glowing school location to start a mission. I'll follow along!","emotion":"helpful","audio":null},
+    {"id":"ch1.maple.01","speaker":"maple","chapter":"resource","text":"Our school garden needs help. Can you spot where we are wasting resources?","emotion":"concerned","audio":null},
+    {"id":"ch1.milo.01","speaker":"milo","chapter":"resource","text":"Look near the tap and watering area. What do you notice?","emotion":"curious","audio":null},
+    {"id":"ch1.milo.correct","speaker":"milo","chapter":"resource","text":"You noticed the problem! Reporting a leaking tap to a school adult can help conserve water.","emotion":"celebrating","audio":null},
+    {"id":"ch1.milo.retry","speaker":"milo","chapter":"resource","text":"Try looking for a solution that saves water and keeps students safe.","emotion":"encouraging","audio":null},
+    {"id":"ch2.sunny.01","speaker":"sunny","chapter":"maze","text":"Oh crumbs! Our lunchtime waste is piling up. Could your Eco Crew sort it out?","emotion":"surprised","audio":null},
+    {"id":"ch2.milo.instructions","speaker":"milo","chapter":"maze","text":"Explore the maze, collect one item, then choose where it belongs at our school. Look for ways to avoid waste first!","emotion":"helpful","audio":null},
+    {"id":"ch2.sunny.schoolrules","speaker":"sunny","chapter":"maze","text":"At Sunny School, fruit scraps go to our compost collection, clean paper and empty cans are recycled, and snack wrappers use general waste.","emotion":"explaining","audio":null},
+    {"id":"ch2.milo.correct","speaker":"milo","chapter":"maze","text":"Great choice! Tell me why that item belongs there.","emotion":"celebrating","audio":null},
+    {"id":"ch2.milo.retry","speaker":"milo","chapter":"maze","text":"Not quite. Read the school's collection sign, then try again. Every school can have different rules.","emotion":"supportive","audio":null},
+    {"id":"ch2.sunny.prevent","speaker":"sunny","chapter":"maze","text":"Even better than sorting unwanted packaging? Avoid needing it in the first place when possible!","emotion":"delighted","audio":null},
+    {"id":"ch3.sprout.01","speaker":"sprout","chapter":"detective","text":"Let's become geography detectives. We need observations before choosing an improvement.","emotion":"curious","audio":null},
+    {"id":"ch3.milo.map","speaker":"milo","chapter":"detective","text":"Our map has three investigation points. Let's visit them and record what we find.","emotion":"thinking","audio":null},
+    {"id":"ch3.sprout.chart","speaker":"sprout","chapter":"detective","text":"This is fictional sample data. Which waste category is largest, and what action might help?","emotion":"explaining","audio":null},
+    {"id":"final.maple.01","speaker":"maple","chapter":"assessment","text":"Now try a new school challenge by yourself. Take your time and explain your decisions.","emotion":"reassuring","audio":null},
+    {"id":"final.milo.01","speaker":"milo","chapter":"assessment","text":"You can do it! I won't give away the answers, but you can reread each question.","emotion":"encouraging","audio":null},
+    {"id":"final.maple.end","speaker":"maple","chapter":"results","text":"Thank you for helping us think carefully about our school's resources and waste.","emotion":"grateful","audio":null}
+  ]
+}

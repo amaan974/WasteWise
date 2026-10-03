@@ -1,0 +1,60 @@
+{
+  "schema_note": "Proposed alternative assessment question bank; existing game uses its own scoring and does not automatically load this file.",
+  "title": "Save Hilltop School — Final Eco Challenge",
+  "scenario": "You are visiting Hilltop School, a DIFFERENT fictional school from Sunny School. The school has a garden, canteen, library and recycling corner. Its stated collection rules: clean paper and empty cans can be recycled; fruit scraps can go to an onsite compost collection; mixed snack wrappers go to general waste. Facilities may differ at real schools.",
+  "untimed": true,
+  "total_marks": 20,
+  "fictional_audit": {"sample_size": 100, "categories_percent": {"food": 40, "packaging": 30, "paper": 20, "other": 10}},
+  "fictional_map": {"orientation": "north at top", "locations": {"canteen": "west", "garden": "east", "library": "north", "recycling_corner": "south"}},
+  "sections": [
+    {
+      "id": "recognise",
+      "title": "Recognise the problems",
+      "max_marks": 4,
+      "questions": [
+        {"id":"r1","prompt":"A tap is dripping after everyone leaves. What is the issue?","options":["Unnecessary water use","A missing recycling sign","Too much paper"],"correct_option":0,"marks":1},
+        {"id":"r2","prompt":"The canteen throws away unopened extra snacks each day. What might this indicate?","options":["Avoidable food waste","Efficient food planning","An improved recycling system"],"correct_option":0,"marks":1},
+        {"id":"r3","prompt":"Why can using a refillable drink bottle matter?","options":["It may prevent single-use packaging","It makes every bottle recyclable","It means water cannot be wasted"],"correct_option":0,"marks":1},
+        {"id":"r4","prompt":"A box of clean writing paper is being thrown away. What should the school consider?","options":["Whether pages can be used again or recycled","Putting it with food scraps","Throwing it out immediately"],"correct_option":0,"marks":1}
+      ]
+    },
+    {
+      "id": "actions",
+      "title": "Choose sustainable actions",
+      "max_marks": 5,
+      "questions": [
+        {"id":"a1","prompt":"The school wants fewer disposable drink containers. Which trial is sensible?","options":["Encourage refill stations and bottles","Buy more individually packaged drinks","Remove all drinking water"],"correct_option":0,"marks":1},
+        {"id":"a2","prompt":"A classroom folder has a loose fastener. What could happen before buying a replacement?","options":["Ask an adult whether it can be repaired","Replace everything immediately","Put it in the compost"],"correct_option":0,"marks":1},
+        {"id":"a3","prompt":"Lunch portions are often left uneaten. Which first step gives useful evidence?","options":["Ask students about portion needs and observe leftovers","Increase every serving","Ignore the issue"],"correct_option":0,"marks":1},
+        {"id":"a4","prompt":"Where should clean paper go under Hilltop School's rules when it cannot be reused?","options":["School recycling","Food compost","General waste automatically"],"correct_option":0,"marks":1},
+        {"id":"a5","prompt":"A tap seems broken. What is the safe action for a Grade 4 student?","options":["Tell a responsible school adult","Attempt plumbing repair alone","Leave it running and do nothing"],"correct_option":0,"marks":1}
+      ]
+    },
+    {
+      "id": "evidence",
+      "title": "Use geographical evidence",
+      "max_marks": 5,
+      "questions": [
+        {"id":"e1","prompt":"Which waste category is largest in Hilltop School's fictional audit?","options":["Food","Paper","Other"],"correct_option":0,"marks":1},
+        {"id":"e2","prompt":"In the sample, how many percentage points larger is food (40%) than paper (20%)?","options":["20 percentage points","10 percentage points","60 percentage points"],"correct_option":0,"marks":1},
+        {"id":"e3","prompt":"If the sample contains 100 items, how many are classified as packaging at 30%?","options":["30","3","70"],"correct_option":0,"marks":1},
+        {"id":"e4","prompt":"On the fictional map, which direction from the centre is the garden?","options":["East","West","South"],"correct_option":0,"marks":1},
+        {"id":"e5","prompt":"Which first action follows from food being the largest category in this sample?","options":["Investigate lunch leftovers and portion sizes","Assume every school has the same waste pattern","Stop collecting any data"],"correct_option":0,"marks":1}
+      ]
+    },
+    {
+      "id": "justify",
+      "title": "Explain your plan",
+      "max_marks": 6,
+      "human_review_required": true,
+      "prompt": "Suggest one realistic change Hilltop School could trial to reduce unnecessary waste or resource use. Use at least one finding from the fictional audit or the map. Explain who would help and why your plan might work.",
+      "rubric": [
+        {"criterion": "Specific, feasible improvement", "marks": 2},
+        {"criterion": "Relevant evidence / environmental reasoning", "marks": 2},
+        {"criterion": "Clear justification including who or how", "marks": 2}
+      ],
+      "automatic_marking": "disabled"
+    }
+  ],
+  "instructions": "A new practice example, not a validated VCAA assessment. Auto-grade only closed items; report the written 6 marks as pending teacher review."
+}
