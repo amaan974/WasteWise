@@ -48,7 +48,7 @@
       o.push({ id: 'hall', type: 'building', c: 15, r: 1, w: 10, h: 6, roof: '#ef8a62', wall: '#fff4d6', label: 'ASSEMBLY HALL', icon: '🏆', doorCol: 19, doorOffset: 24, solar: 4, door: '#ef8a62', locked: () => !isU(4), glow: () => target('hall'), ip: { x: 20, y: 7.6 } });
       o.push({ id: 'classrooms', type: 'building', c: 27, r: 1, w: 11, h: 5, roof: '#b49ce0', wall: '#fff8e6', label: 'CLASSROOMS', icon: '📚', doorCol: 32, door: '#b49ce0', solar: 3, ip: { x: 32.5, y: 6.6 } });
       o.push({ id: 'canteen', type: 'building', c: 28, r: 9, w: 10, h: 6, roof: '#ffcb52', wall: '#fff4c5', label: 'SUNNY CANTEEN', icon: '🥪', doorCol: 32, doorOffset: 24, door: '#ff9f6b', locked: () => !isU(2), glow: () => target('canteen'), ip: { x: 33, y: 15.6 },
-        extra(ctx, ob, ws, t) { if (has('nudeFood')) WW.worldArt.paint.banner(ctx, { x: ob.x + 24, y: ob.y + ob.ph - 150, pw: 150, text: 'NUDE FOOD DAY!', color: '#2fa36b' }, ws, t); } });
+        extra(ctx, ob, ws, t) { if (has('nudeFood')) WW.worldArt.paint.banner(ctx, { x: ob.x + 8, y: ob.y + ob.ph - 150, pw: 136, text: 'NUDE FOOD DAY!', color: '#2fa36b' }, ws, t); } });
       o.push({ id: 'lab', type: 'building', c: 28, r: 18, w: 9, h: 6, roof: '#7fc8e8', wall: '#f4fbff', label: 'ECO LAB', icon: '🔬', doorCol: 32, door: '#7fc8e8', solar: 3, locked: () => !isU(3), glow: () => target('lab'), ip: { x: 32.5, y: 24.6 } });
       // garden
       o.push({ id: 'shed', type: 'shed', c: 2, r: 9, w: 3, h: 2, ip: { x: 4.2, y: 11.5 } });
@@ -77,6 +77,8 @@
       o.push({ id: 'cbin2', type: 'bin', kind: 'recycle', c: 30, r: 17 });
       o.push({ id: 'cbin3', type: 'bin', kind: 'compost', c: 31, r: 17, ip: { x: 30.5, y: 16.6 } });
       o.push({ id: 'sharetable', type: 'sharetable', c: 34, r: 17, w: 2, show: () => has('shareTable') });
+      o.push({ id: 'canteenCompost', type: 'compost', c: 36, r: 15, w: 2, h: 2, show: () => has('compost') });
+      o.push({ id: 'papertray', type: 'papertray', c: 34, r: 6, show: () => has('paperReuse') });
       o.push({ id: 'rbin1', type: 'bin', kind: 'recycle', c: 35, r: 6, ip: { x: 35.5, y: 7.6 } });
       o.push({ id: 'rbin2', type: 'bin', kind: 'landfill', c: 36, r: 6 });
       o.push({ id: 'pbin', type: 'bin', kind: 'landfill', c: 18, r: 24, ip: { x: 18.5, y: 25.6 } });

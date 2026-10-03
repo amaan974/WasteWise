@@ -771,6 +771,15 @@
     D.text(ctx, 'SHARE TABLE', x + w / 2, y - 8, 9.5, '#1d3f8a');
   };
 
+  PAINT.papertray = function (ctx, o, ws, t) {
+    const x = o.x + TS / 2, y = o.y + TS - 6;
+    D.shadow(ctx, x, y + 2, 20, 5, 0.2);
+    D.rr(ctx, x - 18, y - 22, 36, 24, 4, '#3d8bfd', '#1d3f8a', 2);
+    for (let i = 0; i < 3; i++) D.rr(ctx, x - 14 + i * 2, y - 30 + i * 3, 28, 12, 2, '#ffffff', '#9ab8d8', 1.2);
+    D.rr(ctx, x - 30, y - 50, 60, 16, 5, '#fffdf2', '#1d3f8a', 1.5);
+    D.text(ctx, 'REUSE PAPER', x, y - 42, 8.5, '#1d3f8a');
+  };
+
   /* --- Interiors --- */
   PAINT.counter = function (ctx, o, ws, t) {
     const x = o.x, y = o.y, w = o.pw, h = o.ph;
