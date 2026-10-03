@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <title>WasteWise — automated playthrough (smoke test)</title>
+  <style>
+    body { font: 14px/1.4 system-ui, sans-serif; margin: 0; display: grid; grid-template-columns: 420px 1fr; height: 100vh; background: #f4faf6; color: #1f3d33; }
+    #log { padding: 12px 16px; overflow: auto; border-right: 2px solid #cfe7d9; }
+    h1 { font-size: 18px; margin: 4px 0 8px; }
+    .ok { color: #157a45; } .bad { color: #b3261e; font-weight: 700; } .info { color: #557a6c; }
+    iframe { width: 100%; height: 100%; border: 0; }
+    button { font: inherit; padding: 6px 12px; border-radius: 8px; border: 2px solid #2d5a45; background: #ffc93c; cursor: pointer; }
+    #summary { font-weight: 700; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div id="log">
+    <h1>🌿 WasteWise automated playthrough</h1>
+    <p class="info">Plays the full game (intro → Chapter 1 → 2 → 3 → final assessment → results) inside the frame using real input events and the in-game debug helpers, checking each step. It <b>erases this browser’s saved WasteWise progress</b>. Needs a local server (e.g. <code>python3 tools/serve.py</code>) — not file://.</p>
+    <button id="run" type="button">▶ Run playthrough</button>
+    <div id="summary"></div>
+    <ol id="steps"></ol>
+  </div>
+  <iframe id="game" title="WasteWise under test"></iframe>
+  <script src="smoke.js"></script>
+</body>
+</html>

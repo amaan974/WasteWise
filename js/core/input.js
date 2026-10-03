@@ -122,7 +122,7 @@
       e.preventDefault();
       WW.audio && WW.audio.unlock();
       activeId = e.pointerId;
-      stick.setPointerCapture(e.pointerId);
+      try { stick.setPointerCapture(e.pointerId); } catch (err) { /* synthetic or already-released pointer */ }
       input.lastDevice = 'touch';
       update(e);
     });

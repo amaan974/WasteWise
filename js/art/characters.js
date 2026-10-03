@@ -693,12 +693,11 @@
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
     let sc, fy;
-    if (who === 'milo') { sc = h / 46; fy = h * 0.98 + 0 * sc; }
+    if (who === 'narrator') { ctx.restore(); return; }
+    if (who === 'milo') { sc = h / 56; fy = 12 + 58 * sc; }
     else if (who === 'kid') { sc = h / 44; fy = h + 30 * sc; }
-    else if (who === 'narrator') { ctx.restore(); return; }
-    else { sc = h / 46; fy = h + 44 * sc; }
-    if (who === 'milo') fy = h + 6 * sc;
-    C.draw(ctx, who, Object.assign({ x: w / 2, y: fy, dir: 'down', scale: sc, noShadow: true }, o));
+    else { sc = h / 54; fy = h + 40 * sc; }
+    C.draw(ctx, who, Object.assign({}, o, { x: w / 2, y: fy, dir: 'down', scale: sc, noShadow: true }));
     ctx.restore();
   };
 

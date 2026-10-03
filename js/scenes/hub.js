@@ -54,6 +54,7 @@
       WW.story.refresh();
       if (!SD().introDone) sc.runScript(intro);
       else if (params.arrive) sc.runScript(params.arrive);
+      else if (SD().ch3.stage === 'consequence') sc.runScript((s2) => WW.ch3.consequence(s2)); // resume after a reload
     },
     refresh(sc) {
       placeHelpers(sc);

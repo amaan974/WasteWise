@@ -32,8 +32,22 @@
         async next() { for (let i = 0; i < 3 && WW.ui.dialogue.open && !WW.ui.dialogue.choiceMode; i++) { WW.ui.dialogue.advance(); await dbg.run(0.05); } await dbg.run(0.3); },
         /** Skip through dialogue until a choice, panel or idle (max n lines). */
         async skip(n = 30) { for (let i = 0; i < n; i++) { await dbg.run(0.4); if (WW.ui.panel.stack.length) return 'panel'; if (WW.ui.dialogue.open && WW.ui.dialogue.choiceMode) { WW.ui.dialogue.advance(); await dbg.run(0.1); return 'choice'; } if (WW.ui.dialogue.open) await dbg.next(); else if (!(WW.engine.scene && WW.engine.scene.busy)) return 'idle'; } return 'max'; },
+        /** Advance game time (auto-advancing plain dialogue) until fn() is true or maxSec passes. */
+        async until(fn, maxSec = 25) {
+          let t = 0;
+          while (t < maxSec) {
+            if (fn()) return true;
+            if (WW.ui.dialogue.open && !WW.ui.dialogue.choiceMode && !WW.ui.panel.stack.length) { await dbg.next(); t += 0.35; }
+            else { await dbg.run(0.25); t += 0.25; }
+          }
+          return !!fn();
+        },
+        hasChoices: () => WW.ui.dialogue.open && WW.ui.dialogue.choiceMode && document.querySelectorAll('.d-choices .choice-btn').length > 0,
+        topPanel: () => [...document.querySelectorAll('.panel-backdrop:not(.out) .panel')].pop() || null,
         /** Click a visible dialogue choice by index (0-based). */
-        async choose(i) { await dbg.run(0.2); if (WW.ui.dialogue.typing) { WW.ui.dialogue.advance(); await dbg.run(0.1); } const b = document.querySelectorAll('.d-choices .choice-btn')[i]; if (b) b.click(); await dbg.run(0.3); return !!b; },
+        async choose(i) {
+          await dbg.until(() => WW.ui.dialogue.choiceMode, 10);
+          if (WW.ui.dialogue.typing) { WW.ui.dialogue.advance(); await dbg.run(0.1); } await dbg.run(0.2); if (WW.ui.dialogue.typing) { WW.ui.dialogue.advance(); await dbg.run(0.1); } const b = document.querySelectorAll('.d-choices .choice-btn')[i]; if (b) b.click(); await dbg.run(0.3); return !!b; },
         async hold(action, sec) { WW.input.held.add(action); await dbg.run(sec); WW.input.held.delete(action); await dbg.run(0.05); },
         player() { const p = WW.engine.scene.player; return p && { x: Math.round(p.x), y: Math.round(p.y), c: Math.floor(p.x / 48), r: Math.floor(p.y / 48) }; },
         async teleport(x, y) { const p = WW.engine.scene.player; p.x = x; p.y = y; p.path = null; p.trail = []; if (WW.engine.scene.milo) { WW.engine.scene.milo.x = x - 30; WW.engine.scene.milo.y = y; } await dbg.run(0.2); },

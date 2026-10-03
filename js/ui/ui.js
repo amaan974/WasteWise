@@ -283,7 +283,7 @@
       // animated portrait
       if (this.who && this.who !== 'narrator') {
         const talking = this.typing || (WW.audio.speaking && this.voiceStarted);
-        WW.chars.portrait(this.pctx, this.who, 240, 240, { t: WW.engine.time, talking, emotion: this.emotion, scale: undefined });
+        WW.chars.portrait(this.pctx, this.who, 240, 240, { t: WW.engine.time, talking, emotion: this.emotion });
       } else this.pctx.clearRect(0, 0, 240, 240);
     },
   };
