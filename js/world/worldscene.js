@@ -139,6 +139,64 @@
         else x = U.clamp(x, 0, this.map.W - E.W);
         if (this.map.H <= E.H) y = (this.map.H - E.H) / 2;
         else y = U.clamp(y, -(cfg.camTopPad || 0), this.map.H - E.H);
+        return this.camFocus ? { x, y } : this.keepPlayerClearOfHud(x, y);
+      },
+      /** The HUD is HTML layered above the canvas, so the canvas can never draw the player on top of it.
+          Near the map edges (where the camera normally stops) we instead let the camera scroll a little
+          past the edge so the player sprite and their interaction prompt stay clear of every HUD box. */
+      /** Screen-space area that must stay visible: the player sprite (plus carried item) and the current prompt. */
+      playerVisibleBox() {
+        const p = this.player;
+        const box = { x0: p.x - 22, x1: p.x + 22, y0: p.y - (p.carry ? 112 : 86) - p.z, y1: p.y + 8 };
+        if (this.near && !this.busy) {
+          const it = this.near;
+          const label = String(typeof it.label === 'function' ? it.label() : it.label || '');
+          const half = Math.min(170, label.length * 4 + 26);
+          const pt = this.itPoint(it);
+          const bottom = it.actor ? it.actor.headY() - 12 : pt.y - (it.promptH || 70);
+          box.x0 = Math.min(box.x0, pt.x - half);
+          box.x1 = Math.max(box.x1, pt.x + half);
+          box.y0 = Math.min(box.y0, bottom - 36);
+        }
+        return box;
+      },
+      /** True if, with the camera at (cx, cy), the box is fully on screen and under no HUD element. */
+      camShowsBox(cx, cy, box, rects, m = 8) {
+        if (box.x0 - cx < 0 || box.x1 - cx > E.W || box.y0 - cy < 0 || box.y1 - cy > E.H) return false;
+        return !rects.some((r) => !(box.x1 - cx <= r.x0 - m || box.x0 - cx >= r.x1 + m || box.y1 - cy <= r.y0 - m || box.y0 - cy >= r.y1 + m));
+      },
+      keepPlayerClearOfHud(x, y) {
+        if (!this.player) return { x, y };
+        const rects = WW.ui.hudRects();
+        const box = this.playerVisibleBox();
+        const m = 8;
+        // first, never let a map edge clip the player's head or feet off the screen
+        if (box.y0 - y < 4) y = box.y0 - 4;
+        if (box.y1 - y > E.H - 4) y = box.y1 - E.H + 4;
+        if (box.x0 - x < 4) x = box.x0 - 4;
+        if (box.x1 - x > E.W - 4) x = box.x1 - E.W + 4;
+        const lim = { x0: Math.min(x, 0) - E.W / 2, x1: Math.max(x, this.map.W - E.W) + E.W / 2, y0: Math.min(y, 0) - E.H / 2, y1: Math.max(y, this.map.H - E.H) + E.H / 2 };
+        const hits = (cx, cy) => rects.filter((r) => !(box.x1 - cx <= r.x0 - m || box.x0 - cx >= r.x1 + m || box.y1 - cy <= r.y0 - m || box.y0 - cy >= r.y1 + m));
+        const ok = (cx, cy) => cx >= lim.x0 && cx <= lim.x1 && cy >= lim.y0 && cy <= lim.y1 && box.x0 - cx >= 0 && box.x1 - cx <= E.W && box.y0 - cy >= 0 && box.y1 - cy <= E.H;
+        // the four smallest camera nudges that move the player off box r (down, left, right or up on screen)
+        const nudges = (cx, cy, r) => [
+          { x: cx, y: cy - (r.y1 + m - (box.y0 - cy)) },
+          { x: cx + (box.x1 - cx - (r.x0 - m)), y: cy },
+          { x: cx - (r.x1 + m - (box.x0 - cx)), y: cy },
+          { x: cx, y: cy + (box.y1 - cy - (r.y0 - m)) },
+        ];
+        if (!rects.length || !hits(x, y).length) return { x, y };
+        let best = null;
+        const consider = (c) => {
+          if (!ok(c.x, c.y) || hits(c.x, c.y).length) return;
+          const cost = Math.abs(c.x - x) + Math.abs(c.y - y);
+          if (!best || cost < best.cost) best = { x: c.x, y: c.y, cost };
+        };
+        for (const r1 of hits(x, y)) for (const c1 of nudges(x, y, r1)) {
+          consider(c1);
+          for (const r2 of hits(c1.x, c1.y)) for (const c2 of nudges(c1.x, c1.y, r2)) consider(c2);
+        }
+        if (best) { x = best.x; y = best.y; }
         return { x, y };
       },
       focusPoint() {
@@ -215,8 +273,23 @@
         // camera
         const tgt = this.camTarget();
         const k = 1 - Math.pow(0.0015, dt);
-        this.cam.x += (tgt.x - this.cam.x) * k;
-        this.cam.y += (tgt.y - this.cam.y) * k;
+        let nx = this.cam.x + (tgt.x - this.cam.x) * k, ny = this.cam.y + (tgt.y - this.cam.y) * k;
+        if (!this.camFocus && this.player) {
+          // easing must never let the player slip under the HUD: catch up just enough (binary search towards target)
+          const box = this.playerVisibleBox(), rects = WW.ui.hudRects();
+          if (!this.camShowsBox(nx, ny, box, rects) && this.camShowsBox(tgt.x, tgt.y, box, rects)) {
+            let lo = 0, hi = 1;
+            for (let i = 0; i < 10; i++) {
+              const mid = (lo + hi) / 2;
+              if (this.camShowsBox(U.lerp(nx, tgt.x, mid), U.lerp(ny, tgt.y, mid), box, rects)) hi = mid;
+              else lo = mid;
+            }
+            nx = U.lerp(nx, tgt.x, hi);
+            ny = U.lerp(ny, tgt.y, hi);
+          }
+        }
+        this.cam.x = nx;
+        this.cam.y = ny;
       },
       updateAlways(dt) {
         // keep ambient animation alive under menus/transitions

@@ -42,6 +42,13 @@
           }
           return !!fn();
         },
+        /** '' if the player sprite is fully on screen and under no HUD element, else 'offscreen' / 'under-hud'. */
+        playerVisible() {
+          const sc = WW.engine.scene, E = WW.engine, p = sc.player;
+          const b = { x0: p.x - 20 - sc.cam.x, y0: p.y - 80 - sc.cam.y, x1: p.x + 20 - sc.cam.x, y1: p.y + 6 - sc.cam.y };
+          if (b.x0 < 0 || b.y0 < 0 || b.x1 > E.W || b.y1 > E.H) return 'offscreen';
+          return WW.ui.hudRects().some((r) => !(b.x1 <= r.x0 || b.x0 >= r.x1 || b.y1 <= r.y0 || b.y0 >= r.y1)) ? 'under-hud' : '';
+        },
         hasChoices: () => WW.ui.dialogue.open && WW.ui.dialogue.choiceMode && document.querySelectorAll('.d-choices .choice-btn').length > 0,
         topPanel: () => [...document.querySelectorAll('.panel-backdrop:not(.out) .panel')].pop() || null,
         /** Click a visible dialogue choice by index (0-based). */

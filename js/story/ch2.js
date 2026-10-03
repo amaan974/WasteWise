@@ -232,9 +232,30 @@
     const hint = el('button', { class: 'btn small', type: 'button', onclick: () => C2.hint(sc) }, '💡 Hint');
     const rules = el('button', { class: 'btn small', type: 'button', onclick: () => C2.rulesPanel() }, '📋 Rules');
     const leave = el('button', { class: 'btn small ghost', type: 'button', onclick: () => C2.leave(sc) }, '🚪 Leave');
-    const node = el('div', { class: 'maze-hud', role: 'region', 'aria-label': 'Maze status' }, holding, count, el('div', { class: 'maze-meter' }, meterLabel, meter), el('div', { class: 'row' }, hint, rules, leave));
+    const close = el('button', { class: 'maze-hud-close', type: 'button', 'aria-label': 'Hide maze status panel', title: 'Hide this panel' }, '×');
+    const panel = el('div', { id: 'mazeStatus', class: 'maze-hud', role: 'region', 'aria-label': 'Maze status' },
+      el('div', { class: 'maze-hud-head' }, el('span', null, 'Maze status'), close),
+      holding, count, el('div', { class: 'maze-meter' }, meterLabel, meter), el('div', { class: 'row' }, hint, rules, leave));
+    const reopen = el('button', { class: 'maze-reopen', type: 'button', 'aria-label': 'Show maze status panel', 'aria-controls': 'mazeStatus', title: 'Show maze status (hint, rules, leave)' }, '▣');
+    // Collapsible so the panel never has to cover the maze; the choice is remembered. A hidden panel is not a
+    // camera obstacle, so the player can walk the whole top-right area with the maze fully visible.
+    const setCollapsed = (on) => {
+      panel.classList.toggle('collapsed', on);
+      panel.toggleAttribute('data-hud-obstacle', !on);
+      panel.setAttribute('aria-hidden', String(on));
+      panel.inert = on;
+      reopen.hidden = !on;
+      reopen.toggleAttribute('data-hud-obstacle', on);
+      reopen.setAttribute('aria-expanded', String(!on));
+      WW.save.settings.mazeHudCollapsed = on;
+      WW.save.commitSettings();
+    };
+    close.addEventListener('click', () => { WW.audio.sfx('click'); setCollapsed(true); close.blur(); });
+    reopen.addEventListener('click', () => { WW.audio.sfx('click'); setCollapsed(false); reopen.blur(); });
+    const node = el('div', { class: 'maze-hud-layer' }, panel, reopen);
     WW.ui.root.appendChild(node);
     C2.hudNode = node;
+    setCollapsed(!!WW.save.settings.mazeHudCollapsed);
     C2.refreshHud = () => {
       const c = sc.player.carry;
       holding.innerHTML = c ? `${WW.items.img(c, 40)}<div><b>Holding</b><br>${U.esc(WW.data.mazeItems[c].name)}</div>` : '<div class="fine">Hands empty — find some rubbish!</div>';

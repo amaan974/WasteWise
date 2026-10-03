@@ -131,6 +131,21 @@
     await d.hold('down', 2.5);
     check(!sc.map.boxBlocked(sc.player.x, sc.player.y, 11, 8), 'Walls block movement (player never inside a wall)');
     void p0;
+    // HUD must never hide the player (top-left / top-right corners), and the status panel collapses/reopens
+    if (WW.engine.scale > 0) {
+      const corners = [[1, 1], [23, 1], [23, 3], [1, 15]];
+      const hidden = [];
+      for (const [c, r] of corners) { await d.teleport(c * 48 + 24, r * 48 + 34); sc.snapCamera(); const v = d.playerVisible(); if (v) hidden.push(`${c},${r}:${v}`); }
+      check(!hidden.length, 'Player stays visible (not under the HUD) in every maze corner' + (hidden.length ? ': ' + hidden.join(' ') : ''));
+      const panel = doc.querySelector('.maze-hud'), reopenBtn = doc.querySelector('.maze-reopen');
+      panel.querySelector('.maze-hud-close').click(); await d.run(0.3);
+      check(panel.classList.contains('collapsed') && !panel.hasAttribute('data-hud-obstacle') && !reopenBtn.hidden, '× hides the maze status panel and shows the ▣ reopen button');
+      await d.teleport(23 * 48 + 24, 3 * 48 + 34); sc.snapCamera();
+      check(!d.playerVisible(), 'With the panel hidden the player can stand where it was and stay visible');
+      reopenBtn.click(); await d.run(0.3);
+      check(!panel.classList.contains('collapsed') && reopenBtn.hidden && !d.playerVisible(), '▣ restores the panel and the player is still visible');
+      await d.teleport(12 * 48 + 24, 10 * 48 + 34);
+    } else log(null, 'HUD visibility checks skipped (test frame has no size — open smoke.html in a visible window)');
     const bins = { compost: 'st_compost', recycle: 'st_recycle', reuse: 'st_reuse', landfill: 'st_landfill' };
     let wrongTried = false, guard = 0;
     while (guard++ < 20) {

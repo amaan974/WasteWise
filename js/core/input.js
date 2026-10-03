@@ -96,11 +96,11 @@
   input.buildTouchControls = function (container) {
     const U = WW.util;
     container.innerHTML = '';
-    const stick = U.el('div', { class: 'joystick', 'aria-label': 'Movement joystick' });
+    const stick = U.el('div', { class: 'joystick', 'aria-label': 'Movement joystick', 'data-hud-obstacle': '' });
     const knob = U.el('div', { class: 'joystick-knob' });
     stick.appendChild(knob);
-    const actionBtn = U.el('button', { class: 'touch-btn touch-action', type: 'button', 'aria-label': 'Interact' }, '✋');
-    const runBtn = U.el('button', { class: 'touch-btn touch-run', type: 'button', 'aria-label': 'Toggle running', 'aria-pressed': 'false' }, '🏃');
+    const actionBtn = U.el('button', { class: 'touch-btn touch-action', type: 'button', 'aria-label': 'Interact', 'data-hud-obstacle': '' }, '✋');
+    const runBtn = U.el('button', { class: 'touch-btn touch-run', type: 'button', 'aria-label': 'Toggle running', 'aria-pressed': 'false', 'data-hud-obstacle': '' }, '🏃');
     container.append(stick, actionBtn, runBtn);
 
     let activeId = null;

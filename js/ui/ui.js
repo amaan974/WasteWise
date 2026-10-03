@@ -31,6 +31,24 @@
     document.body.classList.toggle('reduced-motion', WW.save.reducedMotion());
   };
 
+  /** Screen boxes (in the game's 960×540 logical units) of visible HUD elements marked with
+      [data-hud-obstacle]. The world camera keeps the player clear of these so the HUD never hides them. */
+  UI.hudRects = function () {
+    const E = WW.engine;
+    if (!E.stage || !E.scale) return [];
+    if (UI._hudRectsFrame === E.frame && UI._hudRects) return UI._hudRects;
+    const sr = E.stage.getBoundingClientRect();
+    const out = [];
+    for (const n of UI.root.parentNode.querySelectorAll('[data-hud-obstacle]')) {
+      const r = n.getBoundingClientRect();
+      if (r.width < 2 || r.height < 2) continue; // hidden (display:none) or collapsed
+      out.push({ x0: (r.left - sr.left) / E.scale, y0: (r.top - sr.top) / E.scale, x1: (r.right - sr.left) / E.scale, y1: (r.bottom - sr.top) / E.scale });
+    }
+    UI._hudRectsFrame = E.frame;
+    UI._hudRects = out;
+    return out;
+  };
+
   UI.isBlocking = () => UI.dialogue.open || UI.panel.stack.length > 0 || UI.menu.isOpen || !!UI.screenLayer.firstChild;
   UI.isPausedOverlay = () => UI.menu.isOpen;
   UI.isSpeaking = (who) => UI.dialogue.open && UI.dialogue.who === who && (UI.dialogue.typing || (WW.audio.speaking && UI.dialogue.voiceStarted));
@@ -59,14 +77,14 @@
   UI.hud = {
     build() {
       this.node = el('div', { class: 'hud hidden' });
-      this.chip = el('div', { class: 'hud-chapter' });
-      this.obj = el('div', { class: 'hud-objective', 'aria-live': 'polite' });
+      this.chip = el('div', { class: 'hud-chapter', 'data-hud-obstacle': '' });
+      this.obj = el('div', { class: 'hud-objective', 'aria-live': 'polite', 'data-hud-obstacle': '' });
       const left = el('div', { class: 'hud-left' }, this.chip, this.obj);
       this.points = el('div', { class: 'hud-points', title: 'Eco points (game score, not real-world impact)' });
       this.btnNote = el('button', { class: 'hud-btn', type: 'button', 'aria-label': 'Open Eco Notebook (N)', title: 'Eco Notebook (N)', onclick: () => UI.notebook.open() }, '📓');
       this.btnSound = el('button', { class: 'hud-btn', type: 'button', 'aria-label': 'Mute or unmute sound', title: 'Sound on/off', onclick: () => UI.toggleMute() });
       this.btnPause = el('button', { class: 'hud-btn', type: 'button', 'aria-label': 'Pause menu (Esc)', title: 'Pause / settings (Esc)', onclick: () => UI.menu.open() }, '⏸');
-      const right = el('div', { class: 'hud-right' }, this.points, this.btnNote, this.btnSound, this.btnPause);
+      const right = el('div', { class: 'hud-right', 'data-hud-obstacle': '' }, this.points, this.btnNote, this.btnSound, this.btnPause);
       this.node.append(left, right);
       UI.root.appendChild(this.node);
       this.refresh();
