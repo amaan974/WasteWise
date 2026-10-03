@@ -352,3 +352,10 @@ body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::aft
   #print-report { display: block !important; }
 }
 #print-report { display: none; font-family: Arial, sans-serif; color: #000; padding: 20px; }
+
+/* ----------------------------- MAZE HUD ----------------------------- */
+.maze-hud { position: absolute; right: calc(var(--u) * 12); top: calc(var(--u) * 62); width: calc(var(--u) * 252); background: rgba(255, 253, 242, .96); border: calc(var(--u) * 3) solid var(--line); border-radius: calc(var(--u) * 16); padding: calc(var(--u) * 8) calc(var(--u) * 10); box-shadow: 0 calc(var(--u) * 4) 0 var(--line); display: flex; flex-direction: column; gap: calc(var(--u) * 6); font-size: calc(var(--u) * 14 * var(--fs)); font-weight: 700; pointer-events: auto !important; z-index: 3; }
+.maze-hold { display: flex; align-items: center; gap: calc(var(--u) * 8); min-height: calc(var(--u) * 44); line-height: 1.2; }
+.maze-meter .meter { height: calc(var(--u) * 12); margin-top: calc(var(--u) * 2); }
+.maze-hud .btn.small { font-size: calc(var(--u) * 12.5 * var(--fs)); padding: calc(var(--u) * 4) calc(var(--u) * 8); }
+.toast img.item-icon { display: inline-block; vertical-align: middle; }

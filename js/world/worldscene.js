@@ -300,7 +300,7 @@
         if (!obj) return;
         const sx = obj.x - cam.x, sy = obj.y - 40 - cam.y;
         const m = 40;
-        if (sx > m && sx < E.W - m && sy > m + 50 && sy < E.H - m) return;
+        if (sx > 10 && sx < E.W - 10 && obj.y - cam.y > 10 && sy < E.H - 10) return;
         const cx = E.W / 2, cy = E.H / 2;
         const ang = Math.atan2(sy - cy, sx - cx);
         const ex = U.clamp(cx + Math.cos(ang) * 1000, m, E.W - m);
