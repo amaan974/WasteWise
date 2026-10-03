@@ -271,14 +271,13 @@
     if (st === 'sprout') sproutTufts(ctx, hx, hy - R + 1, t);
   }
   function spikes(ctx, hx, hy, R, col) {
-    const pts = [];
-    for (let i = 0; i <= 6; i++) {
-      const an = Math.PI * (1.05 + i * 0.15);
-      const r = i % 2 ? R + 7 : R + 1;
-      pts.push(hx + Math.cos(an) * r, hy + Math.sin(an) * r);
+    // individual pointy tufts along the top of the head (no flat base, so it never reads as a hat)
+    for (let i = 0; i < 7; i++) {
+      const a = Math.PI * (1.14 + i * 0.12);
+      const b0 = a - 0.16, b1 = a + 0.16;
+      const tip = R + 6.5 + (i % 2) * 2;
+      D.poly(ctx, [hx + Math.cos(b0) * (R - 1), hy + Math.sin(b0) * (R - 1), hx + Math.cos(a) * tip, hy + Math.sin(a) * tip, hx + Math.cos(b1) * (R - 1), hy + Math.sin(b1) * (R - 1)], col, OUT, 1.6);
     }
-    pts.push(hx + R * 0.6, hy - R * 0.3, hx - R * 0.6, hy - R * 0.3);
-    D.poly(ctx, pts, col, OUT, 1.8);
   }
   function sproutTufts(ctx, x, y, t) {
     const sway = Math.sin(t * 3) * 0.12;
